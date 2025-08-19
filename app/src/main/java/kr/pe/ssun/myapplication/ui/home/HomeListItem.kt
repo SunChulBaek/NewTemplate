@@ -1,6 +1,5 @@
 package kr.pe.ssun.myapplication.ui.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -24,12 +23,12 @@ import kr.pe.ssun.myapplication.model.Pokemon
 @Composable
 fun HomeListItem(
     pokemon: Pokemon,
-    onClick: () -> Unit
+    onClick: (Pokemon) -> Unit
 ) = Row(
     modifier = Modifier.fillMaxWidth()
         .height(80.dp)
         .border(width = 1.dp, color = Color.Gray)
-        .clickable(onClick = onClick)
+        .clickable(onClick = { onClick(pokemon) })
 ) {
     SubcomposeAsyncImage(
         modifier = Modifier.fillMaxHeight().aspectRatio(1f),
