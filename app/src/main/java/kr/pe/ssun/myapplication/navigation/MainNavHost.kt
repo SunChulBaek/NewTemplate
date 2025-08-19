@@ -77,7 +77,7 @@ fun navigate(
     params: Any? = null,
 ) {
     when (dest) {
-        detailNavigationRoute -> navController.navigateToDetail()
+        detailNavigationRoute -> navController.navigateToDetail(params as Int)
         else -> TODO()
     }
 }

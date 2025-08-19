@@ -62,6 +62,9 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.gson)
     implementation(libs.okhttp.logging)
+    // coil
+    implementation(libs.coil.kt)
+    implementation(libs.coil.kt.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

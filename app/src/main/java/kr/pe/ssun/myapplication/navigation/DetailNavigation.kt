@@ -2,6 +2,7 @@ package kr.pe.ssun.myapplication.navigation
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -9,8 +10,16 @@ import kr.pe.ssun.myapplication.ui.detail.DetailScreen
 
 const val detailNavigationRoute = "detail"
 
-fun NavController.navigateToDetail() {
-    this.navigate(detailNavigationRoute)
+const val detailIdArg = "id"
+
+internal class DetailArgs(val id: Int) {
+    constructor(savedStateHandle: SavedStateHandle) : this(
+        id = checkNotNull(savedStateHandle[detailIdArg]).toString().toInt()
+    )
+}
+
+fun NavController.navigateToDetail(id: Int) {
+    this.navigate("$detailNavigationRoute/$id")
 }
 
 fun NavGraphBuilder.detailScreen(
@@ -21,7 +30,7 @@ fun NavGraphBuilder.detailScreen(
     navigate: (String, Any?) -> Unit,
 ) {
     composable(
-        route = detailNavigationRoute,
+        route = "$detailNavigationRoute/{$detailIdArg}",
         enterTransition = { enterTransition },
         exitTransition = { exitTransition },
         popEnterTransition = { popEnterTransition },
