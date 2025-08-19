@@ -10,9 +10,6 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    private val args = DetailArgs(savedStateHandle)
-
-    init {
-        println("[x1210x] detail for id = ${args.id}")
-    }
+    private val _args = DetailArgs(savedStateHandle)
+    val id = _args.id
 }

@@ -2,6 +2,8 @@ package kr.pe.ssun.myapplication.navigation
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -22,7 +24,9 @@ fun NavController.navigateToDetail(id: Int) {
     this.navigate("$detailNavigationRoute/$id")
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 fun NavGraphBuilder.detailScreen(
+    sharedTransitionScope: SharedTransitionScope,
     enterTransition: EnterTransition = EnterTransition.None,
     exitTransition: ExitTransition = ExitTransition.None,
     popEnterTransition: EnterTransition = EnterTransition.None,
@@ -36,6 +40,10 @@ fun NavGraphBuilder.detailScreen(
         popEnterTransition = { popEnterTransition },
         popExitTransition = { popExitTransition }
     ) {
-        DetailScreen(navigate = navigate)
+        DetailScreen(
+            sharedTransitionScope = sharedTransitionScope,
+            animatedContentScope = this@composable,
+            navigate = navigate
+        )
     }
 }

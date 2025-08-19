@@ -1,5 +1,8 @@
 package kr.pe.ssun.myapplication.ui.home
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,8 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import kr.pe.ssun.myapplication.model.Pokemon
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun HomeContent(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     uiState: HomeUiState.Success,
     onClick: (Pokemon) -> Unit
 ) {
@@ -27,6 +33,8 @@ fun HomeContent(
                     key = { index -> pokemons[index].id }
                 ) { index ->
                     HomeListItem(
+                        sharedTransitionScope = sharedTransitionScope,
+                        animatedContentScope = animatedContentScope,
                         pokemon = pokemons[index],
                         onClick = { pokemon -> onClick(pokemon) }
                     )
