@@ -1,5 +1,6 @@
 package kr.pe.ssun.myapplication.navigation
 
+import android.widget.Toast
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -17,6 +18,8 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun MainNavHost(
     navController: NavHostController = rememberNavController(),
+    showToast: (String) -> Toast,
+    onBack: () -> Unit,
     startDestination: String = homeNavigationRoute,
 ) {
     SharedTransitionLayout {
@@ -32,6 +35,8 @@ fun MainNavHost(
                 popEnterTransition = defaultPopEnterTransition(),
                 popExitTransition = defaultPopExitTransition(),
                 navigate = { route, params -> navigate(navController, route, params) },
+                showToast = showToast,
+                onBack = onBack,
             )
             // 상세
             detailScreen(

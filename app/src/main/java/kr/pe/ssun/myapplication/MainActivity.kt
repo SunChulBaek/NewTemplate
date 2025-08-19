@@ -1,6 +1,7 @@
 package kr.pe.ssun.myapplication
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,7 +16,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                MainNavHost()
+                MainNavHost(
+                    showToast = { text ->
+                        Toast.makeText(this, text, Toast.LENGTH_SHORT).apply {
+                            this.show()
+                        }
+                    },
+                    onBack = { finishAffinity() }
+                )
             }
         }
     }

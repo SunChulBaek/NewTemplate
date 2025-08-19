@@ -1,5 +1,6 @@
 package kr.pe.ssun.myapplication.navigation
 
+import android.widget.Toast
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -18,6 +19,8 @@ fun NavGraphBuilder.homeScreen(
     popEnterTransition: EnterTransition = EnterTransition.None,
     popExitTransition: ExitTransition = ExitTransition.None,
     navigate: (String, Any?) -> Unit,
+    showToast: (String) -> Toast,
+    onBack: () -> Unit,
 ) {
     composable(
         route = homeNavigationRoute,
@@ -29,7 +32,9 @@ fun NavGraphBuilder.homeScreen(
         HomeScreen(
             sharedTransitionScope = sharedTransitionScope,
             animatedContentScope = this@composable,
-            navigate = navigate
+            navigate = navigate,
+            showToast = showToast,
+            onBack = onBack
         )
     }
 }
